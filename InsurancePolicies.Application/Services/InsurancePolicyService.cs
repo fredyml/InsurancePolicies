@@ -7,25 +7,45 @@ namespace InsurancePolicies.Application.Services
 {
     public class InsurancePolicyService : IInsurancePolicyService
     {
-        private readonly IInsurancePolicyRepository _insurancePolicyRepository;
+        private readonly IInsurancePolicyRepository _policyRepository;
 
-        public InsurancePolicyService(IInsurancePolicyRepository insurancePolicyRepository)
+        public InsurancePolicyService(IInsurancePolicyRepository policyRepository)
         {
-            _insurancePolicyRepository = insurancePolicyRepository ?? throw new ArgumentNullException(nameof(insurancePolicyRepository));
+            _policyRepository = policyRepository ?? throw new ArgumentNullException(nameof(policyRepository));
         }
 
         public InsurancePolicy GetPolicyByNumber(int policyNumber)
         {
-            var policy = _insurancePolicyRepository.GetByPolicyNumber(policyNumber);
+            var policy = _policyRepository.GetByPolicyNumber(policyNumber);
 
-            return policy ?? throw new NotFoundException($"Policy with number {policyNumber} not found.");
+            if (policy == null)
+            {
+                throw new NotFoundException($"Policy with number {policyNumber} not found.");
+            }
+
+            return policy;
         }
 
         public InsurancePolicy GetPolicyByVehicleLicensePlate(string licensePlate)
         {
-            var policy = _insurancePolicyRepository.GetByVehicleLicensePlate(licensePlate);
+            var policy = _policyRepository.GetByVehicleLicensePlate(licensePlate);
 
-            return policy ?? throw new NotFoundException($"Policy with vehicle license plate {licensePlate} not found.");
+            if (policy == null)
+            {
+                throw new NotFoundException($"Policy with vehicle license plate {licensePlate} not found.");
+            }
+
+            return policy;
+        }
+
+        public void CreatePolicy(InsurancePolicy policy)
+        {
+            if (policy.PolicyStartDate > DateTime.Now || policy.PolicyEndDate < DateTime.Now)
+            {
+                throw new InvalidOperationException("Cannot create a policy that is not currently active.");
+            }
+
+            _policyRepository.Add(policy);
         }
     }
 }

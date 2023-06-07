@@ -1,4 +1,5 @@
 ﻿using InsurancePolicies.Application.Services;
+using InsurancePolicies.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InsurancePolicies.Controllers
@@ -36,6 +37,20 @@ namespace InsurancePolicies.Controllers
             }
 
             return Ok(policy);
+        }
+
+        [HttpPost("CreatePolicy")]
+        public IActionResult CreatePolicy([FromBody] InsurancePolicy policy)
+        {
+            try
+            {
+                _policyService.CreatePolicy(policy);
+                return CreatedAtAction(nameof(GetPolicyByNumber), new { policyNumber = policy.PolicyNumber }, policy);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

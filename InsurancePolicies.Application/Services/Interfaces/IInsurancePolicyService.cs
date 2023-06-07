@@ -6,5 +6,6 @@ namespace InsurancePolicies.Application.Services.Interfaces
     {
         InsurancePolicy GetPolicyByNumber(int policyNumber);
         InsurancePolicy GetPolicyByVehicleLicensePlate(string licensePlate);
+        void CreatePolicy(InsurancePolicy policy);
     }
 }
