@@ -47,19 +47,17 @@ Open a terminal and navigate to the project's root folder.
 
 Run the following command to restore the dependencies:
 
-bash
-Copy code
 dotnet restore
+
 Next, run the following command to build the project:
 
-bash
-Copy code
+
 dotnet build
+
 Finally, run the following command to start the API:
 
-bash
-Copy code
 dotnet run
+
 The API will run on http://localhost:5000 or https://localhost:5001 using HTTPS.
 
 API Documentation
