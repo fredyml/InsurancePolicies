@@ -1,4 +1,6 @@
-﻿namespace InsurancePolicies.Domain
+﻿using InsurancePolicies.Domain.Entities;
+
+namespace InsurancePolicies.Domain.Interfaces
 {
     public interface IInsurancePolicyRepository
     {

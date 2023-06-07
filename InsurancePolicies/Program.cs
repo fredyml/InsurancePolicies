@@ -1,10 +1,11 @@
-using InsurancePolicies.Domain;
-using InsurancePolicies.Infrastructure;
+using InsurancePolicies.Domain.Interfaces;
+using InsurancePolicies.Filters;
+using InsurancePolicies.Infrastructure.Repository;
+using Microsoft.OpenApi.Models;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuración de la conexión a MongoDB desde variables de entorno
 var mongoHost = Environment.GetEnvironmentVariable("MONGO_HOST");
 var mongoPort = Environment.GetEnvironmentVariable("MONGO_PORT");
 var mongoDatabase = Environment.GetEnvironmentVariable("MONGO_DATABASE");
@@ -16,24 +17,36 @@ builder.Services.AddScoped<IMongoDatabase>(provider =>
     return client.GetDatabase(mongoDatabase);
 });
 
-
 builder.Services.AddScoped<IInsurancePolicyRepository, InsurancePolicyRepository>();
+
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(new CustomExceptionFilter());
+});
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Insurance API", Version = "v1" });
+});
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-}
-else
-{
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
+    
+    app.UseSwagger();
+    
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Insurance API V1");
+    });
 }
 
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseAuthorization();
+
+//app.UseAuthorization();
 
 app.MapControllers();
 

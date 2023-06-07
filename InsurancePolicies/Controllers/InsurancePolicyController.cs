@@ -1,4 +1,4 @@
-﻿using InsurancePolicies.Application;
+﻿using InsurancePolicies.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InsurancePolicies.Controllers

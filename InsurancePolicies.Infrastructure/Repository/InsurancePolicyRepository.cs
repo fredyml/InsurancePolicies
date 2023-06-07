@@ -1,6 +1,7 @@
-﻿namespace InsurancePolicies.Infrastructure
+﻿namespace InsurancePolicies.Infrastructure.Repository
 {
-    using InsurancePolicies.Domain;
+    using InsurancePolicies.Domain.Entities;
+    using InsurancePolicies.Domain.Interfaces;
     using MongoDB.Driver;
 
     public class InsurancePolicyRepository : IInsurancePolicyRepository

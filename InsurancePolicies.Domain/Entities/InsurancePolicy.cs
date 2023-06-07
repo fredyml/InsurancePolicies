@@ -1,4 +1,4 @@
-﻿namespace InsurancePolicies.Domain
+﻿namespace InsurancePolicies.Domain.Entities
 {
     public class InsurancePolicy
     {
