@@ -1,6 +1,9 @@
 ﻿using InsurancePolicies.Application.Services.Interfaces;
 using InsurancePolicies.Domain.Entities;
+using InsurancePolicies.Infrastructure.Security;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace InsurancePolicies.Controllers
 {
@@ -12,9 +15,30 @@ namespace InsurancePolicies.Controllers
 
         public InsurancePolicyController(IInsurancePolicyService policyService)
         {
-            _policyService = policyService;
+            _policyService = policyService ?? throw new ArgumentNullException(nameof(policyService));
         }
 
+        [AllowAnonymous]
+        [HttpPost("token")]
+        public IActionResult GenerateToken()
+        {
+            var secretKey = Environment.GetEnvironmentVariable("KEY");
+            var issuer = "https://test.com";
+            var audience = "InsurancePolicy";
+            var expiryMinutes = 60;
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, "NameTest"),
+                new Claim(ClaimTypes.Role, "RoleTest")
+            };
+
+            var jwtTokenService = new JwtTokenService();
+            var token = jwtTokenService.GenerateJwtToken(secretKey, issuer, audience, expiryMinutes, claims);
+
+            return Ok(token);
+        }
+
+        [Authorize]
         [HttpGet("number/{policyNumber}")]
         public IActionResult GetPolicyByNumber(int policyNumber)
         {
@@ -27,6 +51,7 @@ namespace InsurancePolicies.Controllers
             return Ok(policy);
         }
 
+        [Authorize]
         [HttpGet("vehicle/{licensePlate}")]
         public IActionResult GetPolicyByVehicleLicensePlate(string licensePlate)
         {
@@ -39,14 +64,12 @@ namespace InsurancePolicies.Controllers
             return Ok(policy);
         }
 
-        [HttpPost("CreatePolicy")]
+        [Authorize]
+        [HttpPost("create")]
         public IActionResult CreatePolicy([FromBody] InsurancePolicy policy)
         {
-
             _policyService.CreatePolicy(policy);
             return CreatedAtAction(nameof(GetPolicyByNumber), new { policyNumber = policy.PolicyNumber }, policy);
-
         }
     }
 }
-
