@@ -40,12 +40,15 @@ namespace InsurancePolicies.Application.Services
 
         public void CreatePolicy(InsurancePolicy policy)
         {
-            if (policy.PolicyStartDate > DateTime.Now || policy.PolicyEndDate < DateTime.Now)
+            DateTime currentDate = DateTime.Now;
+
+            if (policy.PolicyStartDate >= currentDate &&  policy.PolicyEndDate > currentDate)
             {
-                throw new InvalidOperationException("Cannot create a policy that is not currently active.");
+                _policyRepository.Add(policy);
+                return;
             }
 
-            _policyRepository.Add(policy);
+            throw new InvalidOperationException("Cannot create a policy that is not currently active.");
         }
     }
 }

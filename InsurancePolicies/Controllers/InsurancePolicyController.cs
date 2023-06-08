@@ -1,4 +1,4 @@
-﻿using InsurancePolicies.Application.Services;
+﻿using InsurancePolicies.Application.Services.Interfaces;
 using InsurancePolicies.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,9 +8,9 @@ namespace InsurancePolicies.Controllers
     [Route("api/policies")]
     public class InsurancePolicyController : ControllerBase
     {
-        private readonly InsurancePolicyService _policyService;
+        private readonly IInsurancePolicyService _policyService;
 
-        public InsurancePolicyController(InsurancePolicyService policyService)
+        public InsurancePolicyController(IInsurancePolicyService policyService)
         {
             _policyService = policyService;
         }
@@ -42,15 +42,11 @@ namespace InsurancePolicies.Controllers
         [HttpPost("CreatePolicy")]
         public IActionResult CreatePolicy([FromBody] InsurancePolicy policy)
         {
-            try
-            {
-                _policyService.CreatePolicy(policy);
-                return CreatedAtAction(nameof(GetPolicyByNumber), new { policyNumber = policy.PolicyNumber }, policy);
-            }
-            catch (InvalidOperationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            _policyService.CreatePolicy(policy);
+            return CreatedAtAction(nameof(GetPolicyByNumber), new { policyNumber = policy.PolicyNumber }, policy);
+
         }
     }
 }
+

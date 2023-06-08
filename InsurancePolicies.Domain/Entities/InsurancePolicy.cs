@@ -1,10 +1,13 @@
-﻿namespace InsurancePolicies.Domain.Entities
+﻿using MongoDB.Bson.Serialization.Attributes;
+
+namespace InsurancePolicies.Domain.Entities
 {
     public class InsurancePolicy
     {
         /// <summary>
         /// Número de póliza
         /// </summary>
+        [BsonId]
         public int PolicyNumber { get; set; }
 
         /// <summary>

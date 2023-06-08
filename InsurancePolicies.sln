@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsurancePolicies", "InsurancePolicies\InsurancePolicies.csproj", "{1179AAEF-4DE1-4BC3-A35D-CC0C7CEC9AAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsurancePolicies", "InsurancePolicies\InsurancePolicies.csproj", "{1179AAEF-4DE1-4BC3-A35D-CC0C7CEC9AAE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Core", "2-Core", "{C7C81D9E-F009-40B7-9149-37A2D9CC79B3}"
 EndProject
@@ -11,11 +11,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Infrastructure", "3-Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Presentation", "1-Presentation", "{0E7F6D6A-9DC4-4F8D-8E4D-CBAE27181B76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsurancePolicies.Application", "InsurancePolicies.Application\InsurancePolicies.Application.csproj", "{2906F8A4-8C80-44E9-9206-A5F1F1EFD233}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsurancePolicies.Application", "InsurancePolicies.Application\InsurancePolicies.Application.csproj", "{2906F8A4-8C80-44E9-9206-A5F1F1EFD233}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsurancePolicies.Infrastructure", "InsurancePolicies.Infrastructure\InsurancePolicies.Infrastructure.csproj", "{699F8474-AE38-4FA4-B697-E74E438886AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsurancePolicies.Infrastructure", "InsurancePolicies.Infrastructure\InsurancePolicies.Infrastructure.csproj", "{699F8474-AE38-4FA4-B697-E74E438886AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsurancePolicies.Domain", "InsurancePolicies.Domain\InsurancePolicies.Domain.csproj", "{E2EA8ADB-C93A-4957-BBC2-79D2F0E22FC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsurancePolicies.Domain", "InsurancePolicies.Domain\InsurancePolicies.Domain.csproj", "{E2EA8ADB-C93A-4957-BBC2-79D2F0E22FC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4-Test", "4-Test", "{B7C7EDB3-7978-49E3-A608-1549DEA1DC34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsurancePolicies.Test", "InsurancePolicies.Test\InsurancePolicies.Test.csproj", "{BD5AE2F8-2DD2-4415-BBCA-8E334490C257}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,10 @@ Global
 		{E2EA8ADB-C93A-4957-BBC2-79D2F0E22FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2EA8ADB-C93A-4957-BBC2-79D2F0E22FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2EA8ADB-C93A-4957-BBC2-79D2F0E22FC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD5AE2F8-2DD2-4415-BBCA-8E334490C257}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD5AE2F8-2DD2-4415-BBCA-8E334490C257}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD5AE2F8-2DD2-4415-BBCA-8E334490C257}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD5AE2F8-2DD2-4415-BBCA-8E334490C257}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +56,7 @@ Global
 		{2906F8A4-8C80-44E9-9206-A5F1F1EFD233} = {C7C81D9E-F009-40B7-9149-37A2D9CC79B3}
 		{699F8474-AE38-4FA4-B697-E74E438886AE} = {22B3E612-4C03-4FC2-919A-351EB447C6F5}
 		{E2EA8ADB-C93A-4957-BBC2-79D2F0E22FC2} = {C7C81D9E-F009-40B7-9149-37A2D9CC79B3}
+		{BD5AE2F8-2DD2-4415-BBCA-8E334490C257} = {B7C7EDB3-7978-49E3-A608-1549DEA1DC34}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EAB481E9-1271-471A-9DC7-1DF7BF8B883D}

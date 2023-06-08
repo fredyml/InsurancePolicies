@@ -1,3 +1,5 @@
+using InsurancePolicies.Application.Services;
+using InsurancePolicies.Application.Services.Interfaces;
 using InsurancePolicies.Domain.Interfaces;
 using InsurancePolicies.Filters;
 using InsurancePolicies.Infrastructure.Repository;
@@ -9,7 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 var mongoHost = Environment.GetEnvironmentVariable("MONGO_HOST");
 var mongoPort = Environment.GetEnvironmentVariable("MONGO_PORT");
 var mongoDatabase = Environment.GetEnvironmentVariable("MONGO_DATABASE");
-var connectionString = $"mongodb://{mongoHost}:{mongoPort}";
+var connectionString = $"mongodb://{mongoHost}:{mongoPort}/";
+
 builder.Services.AddSingleton<IMongoClient>(new MongoClient(connectionString));
 builder.Services.AddScoped<IMongoDatabase>(provider =>
 {
@@ -17,6 +20,7 @@ builder.Services.AddScoped<IMongoDatabase>(provider =>
     return client.GetDatabase(mongoDatabase);
 });
 
+builder.Services.AddScoped<IInsurancePolicyService, InsurancePolicyService>();
 builder.Services.AddScoped<IInsurancePolicyRepository, InsurancePolicyRepository>();
 
 builder.Services.AddControllers(options =>
